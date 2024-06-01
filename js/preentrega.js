@@ -38,7 +38,7 @@ for (let i = 1; i <= 5; i++){
             otraVuelta = prompt("¿Quieres hacer otro análisis? \nResponde solo con si o no");
         }while(otraVuelta != "si" && otraVuelta != "no");
             if (otraVuelta == "no"){
-                alert("¡Gracias por visitarnos!");
+                alert("¡¡Gracias por visitarnos!!");
                 break;
             }
     }
