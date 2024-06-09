@@ -88,3 +88,47 @@ for (let i = 1; i <= 5; i++) {
             }
     }
 }
+
+
+
+
+// ----------------------------------------------------------------------------------------------------------------------
+
+
+//---creas visitante con datos-- (función que crea el objeto visitante, saca el ahorro, asigna el turno y lo guarda en el array de visitantes)
+//pedir datos
+//saca el ahorro
+//asigna turno
+//guardas en array visitantes
+//pasar a <<<---visitante anterior---->>>
+
+//<<<---visitante anterior---->>> (función de buscar e ifs)
+//buscar si el nombre ya existe
+//-no, "bienvenido nuevo visitante, te contactamos" y termina
+//-si, entonces ---mostrar cotizaciones del visitante---
+
+
+//---mostrar cotizaciones del visitante--- (función de filtrar)
+//filtrar las cotizaciones que sean del nombre
+//pasar a <<<---quieres cotizar----->>>
+
+
+//<<<---quieres cotizar----->>> (prompt con ifs)
+//-no, entonces "gracias" y termino
+//-si, entonces <<<----queda turno----->>>
+
+
+//<<<----queda turno----->>> (función con ifs)
+//verificar en que número va el turno y si hay disponibles
+//-no, entonces "ya no hay turno" y termino
+//-si, entonces ----crear cotizacion----
+
+
+//----crear cotizacion---- (función que crea el objeto cotización y lo guarda en el array de cotizaciones)
+//pedir datos y guardar en el array
+//hacer cálculo de ahorro
+//pasar a ---asignar turno---
+
+
+//---asignar turno--- (funcíón que suma uno al turno actual y lo guarda en su cotización)
+//verificar en cual va y sumarle uno y termina
