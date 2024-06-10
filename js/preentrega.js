@@ -1,3 +1,5 @@
+
+//definicion del objeto principal (el visitante) con sus datos de contacto, sus datos para el ahorro, el calculo del ahorro y el turno.
 class Visitante {
     constructor(nombre, telefono, ciudad, consumo, ahorro, turno) {
         this.nombre = nombre;
@@ -9,75 +11,94 @@ class Visitante {
     }
 }
 
+//se crea el array de visitantes
 const visitantes = [];
 
-for (let i = 1; i <= 5; i++) {
+//funcion que pide datos al visitante
+function pedirDatos() {
+    let nombre = prompt("Para hacer el cálculo rápido del ahorro con paneles solares, necesitamos algunos datos.\n¿Cuál es tu nombre?");
+    let telefono = prompt("¿Cuál es tu teléfono?");
+    let ciudad;
+    do{
+        ciudad = prompt("Elige una de estas tres ciudades e ingresa su nombre:\n - Guadalajara\n - Chihuahua\n - Campeche").toLowerCase();
+    }while(ciudad != "guadalajara" && ciudad != "chihuahua" && ciudad != "campeche");
+    consumo = parseFloat(prompt("Indica tu consumo mensual en kWh:"));
+    return {nombre, telefono, ciudad, consumo};
+}
 
-    function crearVisitante() {
-        nombre = prompt("Para hacer el cálculo rápido del ahorro con paneles solares, necesitamos algunos datos.\n¿Cuál es tu nombre?");
-        telefono = prompt("¿Cuál es tu teléfono?");
-        do{
-            ciudad = prompt("Elige una de estas tres ciudades e ingresa su nombre:\n - Guadalajara\n - Chihuahua\n - Campeche").toLowerCase();
-        }while(ciudad != "guadalajara" && ciudad != "chihuahua" && ciudad != "campeche");
-        consumo = parseFloat(prompt("Indica tu consumo mensual en kWh:"));
-        
-        const calculoObjetivo = consumo => consumo * 0.8;
-        const OBJETIVO = calculoObjetivo (consumo);
-        
-        console.log("Se ingresaron los datos de nombre " + nombre + ", teléfono " + telefono + ", ciudad " + ciudad +  " y " + consumo + " kWh de consumo mensual")
-        
-        function ahorroMensual(ciudad,OBJETIVO){
-            switch(ciudad){
-                case "guadalajara":
-                    return 2.5 * OBJETIVO;
-                    break;
-                case "chihuahua":
-                    return 3.2 * OBJETIVO;
-                    break;            
-                case "campeche":
-                    return 1.8 * OBJETIVO;
-                    break;
-                default:
-                    return "Esa ciudad no se tiene";
-                    break;                    
-            }
-        }
-        
-        const ahorro = Math.round(ahorroMensual(ciudad,OBJETIVO));
-
-        alert("Con la información que ingresaste calculamos que puedes\nahorrar mensualmente $" + ahorro + " MXN\nal poner paneles solares.");
-        
-        console.log("El ahorro mensual calculado es de $" + ahorro + " MXN");
-        
-        let turno = i;
-        let usuario = visitantes.push(new Visitante(nombre, telefono, ciudad, consumo, ahorro, turno));
-        return usuario
+//funcion que calcula el ahorro del visitante (usa la información registrada en la función pedirDatos)
+function ahorroMensual(ciudad,OBJETIVO){
+    switch(ciudad){
+        case "guadalajara":
+            return 2.5 * OBJETIVO;
+            break;
+        case "chihuahua":
+            return 3.2 * OBJETIVO;
+            break;            
+        case "campeche":
+            return 1.8 * OBJETIVO;
+            break;
+        default:
+            return "Esa ciudad no se tiene";
+            break;                    
     }
+}
+
+
+//crea un visitante (usa las funciones de pedirDatos y calcularAhorro) y lo guarda en el array
+function crearVisitante(i) {
+    const { nombre, telefono, ciudad, consumo } = pedirDatos();
+    const calculoObjetivo = consumo => consumo * 0.8;
+    const OBJETIVO = calculoObjetivo (consumo);
+    const ahorro = Math.round(ahorroMensual(ciudad,OBJETIVO));
+    console.log("Se ingresaron los datos de nombre " + nombre + ", teléfono " + telefono + ", ciudad " + ciudad +  " y " + consumo + " kWh de consumo mensual")
+    alert("Con la información que ingresaste calculamos que puedes\nahorrar mensualmente $" + ahorro + " MXN\nal poner paneles solares.");
+    console.log("El ahorro mensual calculado es de $" + ahorro + " MXN");
     
-    crearVisitante();
-
-    const nombreVisitante = visitantes[visitantes.length-1].nombre;
-    const turnoVisitante = visitantes[visitantes.length-1].turno;
-    const encontrarVisitante = visitantes.find(visitante => visitante.nombre === nombreVisitante && visitante.turno != turnoVisitante);
-    const turnosAnteriores = visitantes.filter(visitante => visitante.nombre.includes(nombreVisitante));
-    const turnos = turnosAnteriores.map(visitante => visitante.turno).join(", ");
+    const usuario = new Visitante(nombre, telefono, ciudad, consumo, ahorro, i);
+    visitantes.push(usuario);
+    return usuario;
+}
 
 
-    function sacarTurnos() {
-        if (encontrarVisitante) {
-            return `${nombreVisitante}, tus turnos son: ${turnos}`;
-        } else {
-            return `Es tu único turno, ${nombreVisitante}`;
-        }
-    }
+
+// function revisarTurnos() {
+
+//     const nombreVisitante = visitantes[visitantes.length-1].nombre;
+//     const turnoVisitante = visitantes[visitantes.length-1].turno;
+//     const encontrarVisitante = visitantes.find(visitante => visitante.nombre === nombreVisitante && visitante.turno != turnoVisitante);
+//     const turnosAnteriores = visitantes.filter(visitante => visitante.nombre.includes(nombreVisitante));
+//     const turnos = turnosAnteriores.map(visitante => visitante.turno).join(", ");
+
+
+//     function sacarTurnos() {
+//         if (encontrarVisitante) {
+//             return `${nombreVisitante}, tus turnos son: ${turnos}`;
+//         } else {
+//             return `Es tu único turno, ${nombreVisitante}`;
+//         }
+//     }
+
+
+
+// }
+
+
+
+
+for (let i = 1; i <= 5; i++) {
+    crearVisitante(i);
+
+
+
 
     if (i == 5){
-        alert("Tu turno es el no. " + i + "\n" + sacarTurnos() + "\nTe contactamos pronto\n\nYa no hay más turnos disponibles");
+        alert("Tu turno es el no. " + i + "\n" + /*sacarTurnos() + */"\nTe contactamos pronto\n\nYa no hay más turnos disponibles");
         console.log("Turno " + i + " ya utilizado");
         break;
     }
     else{
-        alert("Tienes el turno " + i + "\n" + sacarTurnos() + "\nTe contactamos durante el día");
+        alert("Tienes el turno " + i + "\n" + /*sacarTurnos() + */"\nTe contactamos durante el día");
         console.log("Turno " + i + " ya utilizado");
         do{
             otraVuelta = prompt("¿Quieres hacer otro análisis? \nResponde solo con si o no");
@@ -88,6 +109,14 @@ for (let i = 1; i <= 5; i++) {
             }
     }
 }
+
+
+
+
+
+
+
+
 
 
 
