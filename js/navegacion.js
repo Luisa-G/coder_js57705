@@ -1,5 +1,4 @@
-//declaracion de variables para header y footer
-//definicion de constantes
+//declaracion de constantes header
 const cuerpo = document.body;
 const titulo = document.getElementById('titulo');
 const cabecera = document.getElementById('header');
@@ -10,8 +9,6 @@ const links = ["Inicio", "Productos", "Contacto"];
 const liImagen = document.createElement('li');
 const img = document.createElement('img');
 const ORIGEN = document.createElement('a');
-const footer = document.createElement('footer');
-const parrafoFooter = document.createElement('p');
 
 
 //asignacion de colores de fondo
@@ -45,9 +42,4 @@ for (const link of links) {
     ul.appendChild(li);
 }
 
-
-
-//creacion del footer
-// footer[0].appendChild(parrafoFooter);
-// parrafoFooter.innerHTML = 'Lombricultura GDL'
 
